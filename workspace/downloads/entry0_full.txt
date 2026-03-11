@@ -1,0 +1,56 @@
+            ;-- section..text:
+            ;-- segment.LOAD1:
+            ;-- pc:
+            ; XREFS(231)
+┌ 108: entry0 ();
+│ afv: vars(5:sp[0x8..0x28])
+│           0x000b8000      9f2403d5       bti j                       ; [14] -r-x section size 1215920 named .text
+│           0x000b8004      1d0080d2       mov x29, 0
+│           ; XREFS(35)
+│           0x000b8008      1e0080d2       mov x30, 0
+│           0x000b800c      e0030091       mov x0, sp
+│           ; DATA XREFS from fcn.000e9ba4 @ 0xe9c08(r), 0xe9c0c(r)
+│           ; DATA XREF from fcn.0010d854 @ 0x10d8d0(r)
+│           ; DATA XREF from fcn.001d6010 @ 0x1d613c(r)
+│       ┌─< 0x000b8010      01000014       b 0xb8014
+│       │   ; CODE XREF from entry0 @ 0xb8010(x)
+│       └─> 0x000b8014      3f2303d5       paciasp
+│           ; XREFS: DATA 0x000e8f8c  DATA 0x000e9090  DATA 0x000fe170  
+│           ; XREFS: DATA 0x00102e50  DATA 0x001af410  DATA 0x001b9914  
+│           ; XREFS: DATA 0x001b9934  DATA 0x001b9968  DATA 0x001b996c  
+│           ; XREFS: DATA 0x001c8e08  
+│           0x000b8018      ffc300d1       sub sp, sp, 0x30
+│           0x000b801c      fd7b02a9       stp x29, x30, [var_20h]
+│           ; XREFS: DATA 0x000e9084  DATA 0x000e909c  DATA 0x000fddcc  
+│           ; XREFS: DATA 0x000fdddc  DATA 0x001b9954  DATA 0x001b9958  
+│           0x000b8020      fd830091       add x29, sp, 0x20
+│           0x000b8024      680a00f0       adrp x8, 0x207000
+│           ; DATA XREFS from fcn.000e8f60 @ 0xe9084(r), 0xe909c(w)
+│           ; DATA XREFS from fcn.000fdd5c @ 0xfddcc(r), 0xfdddc(w)
+│           ; DATA XREF from fcn.00138b10 @ 0x138b1c(r)
+│           0x000b8028      690a00f0       adrp x9, 0x207000
+│           0x000b802c      6a0a00f0       adrp x10, 0x207000
+│           ; DATA XREF from fcn.000e87b8 @ 0xe87fc(r)
+│           0x000b8030      620a00f0       adrp x2, 0x207000
+│           ; DATA XREF from fcn.000e87b8 @ 0xe87f4(r)
+│           0x000b8034      e3230091       add x3, sp, 8
+│           0x000b8038      e1031faa       mov x1, xzr
+│           0x000b803c      08e146f9       ldr x8, [x8, 0xdc0]         ; [0x207dc0:4]=0
+│                                                                      ; section..got
+│                                                                      [22] -rw- section size 2680 named .got
+│           ; DATA XREF from fcn.0014efd8 @ 0x14f0c0(r)
+│           ; DATA XREF from fcn.0014f9e8 @ 0x14fa48(r)
+│           ; DATA XREF from fcn.00151ccc @ 0x151d2c(r)
+│           0x000b8040      29e546f9       ldr x9, [x9, 0xdc8]
+│           0x000b8044      4ae946f9       ldr x10, [x10, 0xdd0]
+│           0x000b8048      e8a700a9       stp x8, x9, [var_8h]
+│           0x000b804c      ea0f00f9       str x10, [var_0h]
+│           0x000b8050      42ec46f9       ldr x2, [x2, 0xdd8]
+│           0x000b8054      5fa30494       bl sym.imp.__libc_init
+│           ; DATA XREF from fcn.000b806c @ 0xb8078(r)
+│           0x000b8058      5f2403d5       bti c
+│       ┌─< 0x000b805c      600000b4       cbz x0, 0xb8068
+│       │   0x000b8060      f00300aa       mov x16, x0
+│       │   0x000b8064      00021fd6       br x16
+│       │   ; CODE XREF from entry0 @ 0xb805c(x)
+└       └─> 0x000b8068      c0035fd6       ret

@@ -1,0 +1,12 @@
+#!/bin/sh
+touch libr/xps/deps.h
+touch libr/xps/deps.mk
+case "$1" in
+--report|-r|--version|-V|-qV|--quiet-version|--help)
+	: # nothing to do here
+	;;
+*)
+	[ dist/plugins-cfg/plugins.def.cfg -nt ./plugins.cfg ] && rm -f plugins.cfg
+	./configure-plugins $*
+	;;
+esac

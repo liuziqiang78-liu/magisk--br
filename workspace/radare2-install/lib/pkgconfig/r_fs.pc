@@ -1,0 +1,11 @@
+prefix=/home/admin/workspace/radare2-install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: r_fs
+Description: The UNIX-like reverse engineering toolkit
+Version: 6.1.1
+Requires: r_util r_io
+Cflags: -I${includedir}/libr
+Libs: -L${libdir} -lr_fs -ldl

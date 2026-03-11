@@ -1,0 +1,62 @@
+/dts-v1/;
+/plugin/;
+
+/* 一加8T (KB2000) 电池温控补丁 */
+/* 基于原始 DTS 配置优化 */
+
+&{/} {
+    fragment@thermal_patch {
+        target-path = "/sys/class/oplus_chg/common";
+        __overlay__ {
+            /* 温度阈值调整 - 提高充电温度范围 */
+            thermal_mitigation {
+                compatible = "oplus,thermal-mitigation";
+                
+                /* 原始值: 0x2dc6c0 0x16e360 0xf4240 0x7a120 */
+                /* 优化值: 3A, 2A, 1.5A, 1A */
+                mitigation_levels = <3000000 2000000 1500000 1000000>;
+                
+                /* 温度阈值调整 (0.1°C) */
+                cold_threshold = <200>;      /* 20°C */
+                cool_threshold = <500>;      /* 50°C */
+                normal_threshold = <1600>;   /* 160°C */
+                warm_threshold = <4500>;     /* 450°C */
+                hot_threshold = <5000>;      /* 500°C */
+            };
+            
+            /* 充电电流温度补偿 */
+            temp_compensation {
+                compatible = "oplus,temp-compensation";
+                
+                /* 冷温度 (20°C) */
+                temp_cold_fastchg_current = <500000>;  /* 500mA */
+                temp_cold_vfloat = <3980000>;          /* 3.98V */
+                
+                /* 微冷温度 (0°C) */
+                temp_little_cold_fastchg_current = <950000>;  /* 950mA */
+                temp_little_cold_vfloat = <4435000>;          /* 4.435V */
+                
+                /* 冷却温度 (50°C) */
+                temp_cool_fastchg_current_high = <1100000>;  /* 1100mA */
+                temp_cool_fastchg_current_low = <1100000>;   /* 1100mA */
+                temp_cool_vfloat = <4435000>;                /* 4.435V */
+                
+                /* 微冷却温度 (120°C) */
+                temp_little_cool_fastchg_current = <1100000>;  /* 1100mA */
+                temp_little_cool_vfloat = <4435000>;           /* 4.435V */
+                
+                /* 正常温度 (160°C) */
+                temp_normal_fastchg_current = <1100000>;  /* 1100mA */
+                temp_normal_vfloat = <4435000>;           /* 4.435V */
+                
+                /* 温暖温度 (450°C) */
+                temp_warm_fastchg_current = <600000>;  /* 600mA */
+                temp_warm_vfloat = <4130000>;          /* 4.13V */
+                
+                /* 热温度 (500°C) */
+                temp_hot_fastchg_current = <512000>;  /* 512mA */
+                temp_hot_vfloat = <3980000>;          /* 3.98V */
+            };
+        };
+    };
+};

@@ -1,0 +1,12 @@
+#ifndef R_VERSION_H
+#define R_VERSION_H 1
+#define R2_VERSION_COMMIT 1
+#define R2_VERSION "6.1.1"
+#define R2_VERSION_MAJOR 6
+#define R2_VERSION_MINOR 1
+#define R2_VERSION_PATCH 1
+#define R2_VERSION_NUMBER 60101
+#define R2_GITTAP "6.1.1"
+#define R2_GITTIP "2d0976c23a5345581eef6c3065aace91b35e74d9"
+#define R2_BIRTH "2026-03-10__00:06:46"
+#endif

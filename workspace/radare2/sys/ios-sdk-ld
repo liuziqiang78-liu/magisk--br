@@ -1,0 +1,31 @@
+#!/bin/sh
+
+[ -z "${SDK}"    ] && SDK=iphoneos
+[ -z "${IOSVER}" ] && IOSVER=14.0
+[ -z "${CPU}"    ] && CPU="arm64"
+
+LINKER=$(xcrun --sdk ${SDK} -f ld)
+if [ "$SDK" = "iphoneos" ]; then
+	VERSION_FLAG="-platform_version ios ${IOSVER} $(xcrun --sdk iphoneos --show-sdk-version)"
+else
+	VERSION_FLAG="-platform_version ios-simulator ${IOSVER} $(xcrun --sdk iphonesimulator --show-sdk-version)"
+fi
+CPUS=""
+CPU=`echo $CPU | sed -e 's,+, ,g'`
+for a in `IFS=+ echo ${CPU}` ; do
+	CPUS="-arch $a ${CPUS}"
+done
+APPLE_SDK=`echo ${SDK} | tr a-z A-Z`
+BITCODE_BUNDLE=""
+if [ "${EMBED_BITCODE}" = "1" ]; then
+	BITCODE_BUNDLE="-bitcode_bundle"
+fi
+
+LD="${LINKER} ${VERSION_FLAG} ${CPUS} ${BITCODE_BUNDLE}"
+echo "$LD $*"
+${LD} $*
+r=$?
+if [ "$r" != 0 ]; then
+	echo ${LD} $* >&2
+fi
+exit $r

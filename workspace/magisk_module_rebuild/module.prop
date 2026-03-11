@@ -1,0 +1,5 @@
+id=fopbatt_rebuild
+name=0aO电池工具包（重建版）
+version=Rebuild@1.0.0|Pure@搭叩AI
+author=搭叩AI
+description=基于逆向分析重建的电池控制程序，移除所有网络验证和许可证验证功能

@@ -1,0 +1,56 @@
+/dts-v1/;
+/plugin/;
+
+/* 一加8T (KB2000) SOC 平滑补丁 */
+/* 基于原始 DTS 配置优化 */
+
+&{/} {
+    fragment@soc_smooth {
+        target-path = "/sys/class/oplus_chg/common";
+        __overlay__ {
+            /* SOC 平滑配置 */
+            soc_smooth {
+                compatible = "oplus,soc_smooth";
+                
+                /* SOC 平滑使能 */
+                soc_smooth_enable = <1>;
+                
+                /* SOC 平滑参数 */
+                soc_smooth_window = <5>;        /* 平滑窗口: 5% */
+                soc_smooth_threshold = <3>;     /* 平滑阈值: 3% */
+                soc_smooth_max_delta = <10>;    /* 最大变化: 10% */
+                
+                /* SOC 显示精度 */
+                soc_display_precision = <1>;    /* 显示精度: 1% */
+                soc_decimal_enable = <1>;       /* 小数显示使能 */
+                soc_decimal_speed_min = <20>;   /* 小数速度最小值 */
+                
+                /* SOC 校准参数 */
+                soc_calib_enable = <1>;         /* 校准使能 */
+                soc_calib_level = <130>;        /* 校准级别 */
+                soc_calib_interval = <3600>;    /* 校准间隔: 3600秒 */
+                
+                /* SOC 保护参数 */
+                soc_min_display = <1>;          /* 最小显示: 1% */
+                soc_max_display = <100>;        /* 最大显示: 100% */
+                soc_power_off = <0>;            /* 关机SOC: 0% */
+                
+                /* SOC 温度补偿 */
+                soc_temp_comp_enable = <1>;     /* 温度补偿使能 */
+                soc_temp_comp_factor = <5>;     /* 温度补偿因子 */
+                
+                /* SOC 电压补偿 */
+                soc_voltage_comp_enable = <1>;  /* 电压补偿使能 */
+                soc_voltage_comp_factor = <10>; /* 电压补偿因子 */
+                
+                /* SOC 循环补偿 */
+                soc_cycle_comp_enable = <1>;    /* 循环补偿使能 */
+                soc_cycle_comp_factor = <2>;    /* 循环补偿因子 */
+                
+                /* SOC 日志 */
+                soc_log_enable = <1>;
+                soc_log_path = "/data/opbatt/soc_smooth.log";
+            };
+        };
+    };
+};

@@ -1,0 +1,65 @@
+/dts-v1/;
+/plugin/;
+
+/* 一加8T (KB2000) DDRC (深度放电恢复) 补丁 */
+/* 基于原始 DTS 配置优化 */
+
+&{/} {
+    fragment@ddrc_patch {
+        target-path = "/sys/class/oplus_chg/common";
+        __overlay__ {
+            /* DDRC 配置 */
+            ddrc {
+                compatible = "oplus,ddrc";
+                
+                /* DDRC 使能 */
+                ddrc_enable = <1>;
+                
+                /* DDRC 阈值配置 */
+                ddrc_soc_threshold = <20>;      /* SOC 阈值: 20% */
+                ddrc_voltage_threshold = <3400000>;  /* 电压阈值: 3.4V */
+                ddrc_current_threshold = <500000>;   /* 电流阈值: 500mA */
+                
+                /* DDRC 充电电流限制 */
+                ddrc_charge_current = <800000>;  /* 800mA */
+                ddrc_charge_voltage = <4200000>; /* 4.2V */
+                
+                /* DDRC 恢复策略 */
+                ddrc_recovery_mode = <1>;        /* 恢复模式: 1=自动, 0=手动 */
+                ddrc_recovery_time = <3600>;    /* 恢复时间: 3600秒 */
+                ddrc_recovery_cycles = <3>;     /* 恢复循环次数 */
+                
+                /* DDRC 温度保护 */
+                ddrc_temp_min = <100>;          /* 最低温度: 10°C */
+                ddrc_temp_max = <4500>;         /* 最高温度: 450°C */
+                
+                /* DDRC 电压保护 */
+                ddrc_voltage_min = <3000000>;   /* 最低电压: 3.0V */
+                ddrc_voltage_max = <4400000>;   /* 最高电压: 4.4V */
+                
+                /* DDRC 电流限制 */
+                ddrc_current_min = <100000>;    /* 最小电流: 100mA */
+                ddrc_current_max = <1500000>;   /* 最大电流: 1.5A */
+                
+                /* DDRC 步进充电 */
+                ddrc_step_charge {
+                    step1_current = <500000>;   /* 500mA */
+                    step1_voltage = <3800000>;  /* 3.8V */
+                    step1_time = <1800>;        /* 1800秒 */
+                    
+                    step2_current = <700000>;   /* 700mA */
+                    step2_voltage = <4000000>;  /* 4.0V */
+                    step2_time = <1800>;        /* 1800秒 */
+                    
+                    step3_current = <800000>;   /* 800mA */
+                    step3_voltage = <4200000>;  /* 4.2V */
+                    step3_time = <1800>;        /* 1800秒 */
+                };
+                
+                /* DDRC 日志 */
+                ddrc_log_enable = <1>;
+                ddrc_log_path = "/data/opbatt/ddrc.log";
+            };
+        };
+    };
+};

@@ -1,0 +1,11 @@
+
+name="$1"
+for dev in /sys/class/input/event*; do
+    local devname
+    devname=$(cat "$dev/device/name" 2>/dev/null)
+    if [ "$devname" = "$name" ]; then
+        basename "$dev"
+        exit 0
+    fi
+done
+exit 0

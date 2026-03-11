@@ -1,0 +1,11 @@
+NAME=intreg $$
+FILE=-
+CMDS=<<EOF
+s 10
+ar PC=$$
+ae PC,0,+
+EOF
+EXPECT=<<EOF
+0xa
+EOF
+RUN

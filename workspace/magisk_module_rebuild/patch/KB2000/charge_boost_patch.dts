@@ -1,0 +1,50 @@
+/dts-v1/;
+/plugin/;
+
+/* 一加8T (KB2000) 充电升压补丁 */
+/* 基于原始 DTS 配置优化 */
+
+&{/} {
+    fragment@charge_boost {
+        target-path = "/sys/class/oplus_chg/common";
+        __overlay__ {
+            /* 充电升压配置 */
+            charge_boost {
+                compatible = "oplus,charge-boost";
+                
+                /* 提高充电电压 */
+                boost_voltage_normal = <4450000>;  /* 4.45V */
+                boost_voltage_cool = <4450000>;    /* 4.45V */
+                boost_voltage_warm = <4150000>;    /* 4.15V */
+                
+                /* 提高充电电流 */
+                boost_current_normal = <1200000>;  /* 1200mA */
+                boost_current_cool = <1200000>;    /* 1200mA */
+                boost_current_warm = <700000>;     /* 700mA */
+                
+                /* 提高输入电流限制 */
+                input_current_boost = <3200000>;   /* 3200mA */
+                pd_input_current_boost = <3200000>; /* 3200mA */
+                qc_input_current_boost = <2200000>; /* 2200mA */
+                
+                /* VOOC 快充升压 */
+                vooc_boost_current = <3800000>;    /* 3800mA */
+                vooc_boost_voltage = <4450000>;    /* 4.45V */
+                
+                /* 步进充电优化 */
+                step_charge_boost {
+                    step1_current = <5800000>;     /* 5.8A */
+                    step2_current = <4000000>;     /* 4.0A */
+                    step3_current = <3000000>;     /* 3.0A */
+                };
+                
+                /* FFC 快充升压 */
+                ffc_boost {
+                    ff1_boost_current = <600000>;  /* 600mA */
+                    ffc2_boost_current = <400000>; /* 400mA */
+                    ffc_boost_voltage = <4550000>; /* 4.55V */
+                };
+            };
+        };
+    };
+};

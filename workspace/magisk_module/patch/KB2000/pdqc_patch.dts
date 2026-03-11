@@ -1,0 +1,78 @@
+/dts-v1/;
+/plugin/;
+
+/* 一加8T (KB2000) PDQC (PD/QC 快充) 补丁 */
+/* 基于原始 DTS 配置优化 */
+
+&{/} {
+    fragment@pdqc_patch {
+        target-path = "/sys/class/oplus_chg/common";
+        __overlay__ {
+            /* PDQC 配置 */
+            pdqc {
+                compatible = "oplus,pdqc";
+                
+                /* PD 快充配置 */
+                pd_enable = <1>;
+                pd_max_voltage = <4380000>;   /* 4.38V */
+                pd_max_current = <3200000>;   /* 3.2A */
+                pd_max_power = <65000000>;    /* 65W */
+                
+                /* PD 温度补偿 */
+                pd_temp_little_cold_fastchg_current_high = <2000000>;  /* 2.0A */
+                pd_temp_little_cold_fastchg_current_low = <1000000>;   /* 1.0A */
+                pd_temp_cool_fastchg_current_high = <2000000>;         /* 2.0A */
+                pd_temp_cool_fastchg_current_low = <1000000>;          /* 1.0A */
+                pd_temp_little_cool_fastchg_current = <3200000>;       /* 3.2A */
+                pd_temp_normal_fastchg_current = <3200000>;            /* 3.2A */
+                pd_temp_warm_fastchg_current = <600000>;               /* 600mA */
+                
+                /* QC 快充配置 */
+                qc_enable = <0>;  /* QC 已禁用 */
+                qc_max_voltage = <4380000>;   /* 4.38V */
+                qc_max_current = <2200000>;   /* 2.2A */
+                qc_max_power = <30000000>;    /* 30W */
+                
+                /* QC 温度补偿 */
+                qc_temp_little_cold_fastchg_current_high = <2000000>;  /* 2.0A */
+                qc_temp_little_cold_fastchg_current_low = <1000000>;   /* 1.0A */
+                qc_temp_cool_fastchg_current_high = <2000000>;         /* 2.0A */
+                qc_temp_cool_fastchg_current_low = <1000000>;          /* 1.0A */
+                qc_temp_little_cool_fastchg_current = <2200000>;       /* 2.2A */
+                qc_temp_normal_fastchg_current = <2200000>;            /* 2.2A */
+                qc_temp_warm_fastchg_current = <600000>;               /* 600mA */
+                
+                /* PDQC 电压阈值 */
+                pdqc_to_5v_thr = <4100000>;  /* 4.1V */
+                
+                /* PDQC 输入电流限制 */
+                pd_input_current_limit = <3200000>;  /* 3.2A */
+                qc_input_current_limit = <2200000>;  /* 2.2A */
+                
+                /* PDQC 协议检测 */
+                pd_detection = <8>;
+                qc_detection = <8>;
+                
+                /* PDQC 充电策略 */
+                pd_charge_strategy = <1>;  /* 1=优先PD, 0=优先QC */
+                qc_charge_strategy = <0>;
+                
+                /* PDQC 温度保护 */
+                pdqc_temp_min = <100>;     /* 10°C */
+                pdqc_temp_max = <4500>;    /* 450°C */
+                
+                /* PDQC 电压保护 */
+                pdqc_voltage_min = <3000000>;   /* 3.0V */
+                pdqc_voltage_max = <4400000>;   /* 4.4V */
+                
+                /* PDQC 电流保护 */
+                pdqc_current_min = <100000>;    /* 100mA */
+                pdqc_current_max = <3500000>;   /* 3.5A */
+                
+                /* PDQC 日志 */
+                pdqc_log_enable = <1>;
+                pdqc_log_path = "/data/opbatt/pdqc.log";
+            };
+        };
+    };
+};
