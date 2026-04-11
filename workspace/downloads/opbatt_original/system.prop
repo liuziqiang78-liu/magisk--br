@@ -1,3 +1,0 @@
-ro.boot.veritymode=enforcing
-persist.sys.environment.temp=550
-oplus.dex.tempcontrol=false

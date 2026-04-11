@@ -1,4 +1,0 @@
-PACKAGE=radare2
-DEPENDS=libc6
-
-include ../CONFIG

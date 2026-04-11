@@ -1,9 +1,0 @@
-OBJ_XXHASH=muta_xxhash.o
-
-STATIC_OBJ+=${OBJ_XXHASH}
-TARGET_XXHASH=muta_xxhash.${EXT_SO}
-
-ALL_TARGETS+=${TARGET_XXHASH}
-
-${TARGET_XXHASH}: ${OBJ_XXHASH}
-	$(CC) $(call libname,muta_xxhash) ${LDFLAGS} ${CFLAGS} -o ${TARGET_XXHASH} ${OBJ_XXHASH}

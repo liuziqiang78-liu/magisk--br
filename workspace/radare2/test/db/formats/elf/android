@@ -1,8 +1,0 @@
-NAME=android lib
-FILE=bins/elf/android/libpairipcore.so
-CMDS=e asm.os
-EXPECT=<<EOF
-android
-EOF
-RUN
-
